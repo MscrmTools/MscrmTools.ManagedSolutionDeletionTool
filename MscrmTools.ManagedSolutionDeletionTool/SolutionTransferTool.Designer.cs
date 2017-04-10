@@ -36,17 +36,18 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.btnClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbLoadSolutions = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbDeleteSolutions = new System.Windows.Forms.ToolStripButton();
             this.lstSourceSolutions = new System.Windows.Forms.ListView();
             this.uniquename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.friendlyname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.packageType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.version = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.installedon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.publisher = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbDeleteSolutions = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -63,8 +64,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.tsbDeleteSolutions});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1200, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -74,7 +74,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 29);
+            this.btnClose.Size = new System.Drawing.Size(23, 22);
             this.btnClose.Text = "Close this tool";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.Click += new System.EventHandler(this.BtnCloseClick);
@@ -82,22 +82,37 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 32);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tsbLoadSolutions
             // 
             this.tsbLoadSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbLoadSolutions.Image")));
             this.tsbLoadSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLoadSolutions.Name = "tsbLoadSolutions";
-            this.tsbLoadSolutions.Size = new System.Drawing.Size(158, 29);
+            this.tsbLoadSolutions.Size = new System.Drawing.Size(105, 22);
             this.tsbLoadSolutions.Text = "Load Solutions";
             this.tsbLoadSolutions.Click += new System.EventHandler(this.TsbLoadSolutionsClick);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbDeleteSolutions
+            // 
+            this.tsbDeleteSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbDeleteSolutions.Image")));
+            this.tsbDeleteSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteSolutions.Name = "tsbDeleteSolutions";
+            this.tsbDeleteSolutions.Size = new System.Drawing.Size(60, 22);
+            this.tsbDeleteSolutions.Text = "Delete";
+            this.tsbDeleteSolutions.Click += new System.EventHandler(this.tsbDeleteSolutions_Click);
             // 
             // lstSourceSolutions
             // 
             this.lstSourceSolutions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.uniquename,
             this.friendlyname,
+            this.packageType,
             this.version,
             this.installedon,
             this.publisher,
@@ -107,9 +122,8 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.lstSourceSolutions.FullRowSelect = true;
             this.lstSourceSolutions.HideSelection = false;
             this.lstSourceSolutions.Location = new System.Drawing.Point(0, 0);
-            this.lstSourceSolutions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lstSourceSolutions.Name = "lstSourceSolutions";
-            this.lstSourceSolutions.Size = new System.Drawing.Size(1200, 1013);
+            this.lstSourceSolutions.Size = new System.Drawing.Size(800, 654);
             this.lstSourceSolutions.TabIndex = 2;
             this.lstSourceSolutions.UseCompatibleStateImageBehavior = false;
             this.lstSourceSolutions.View = System.Windows.Forms.View.Details;
@@ -125,6 +139,11 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             // 
             this.friendlyname.Text = "Friendly name";
             this.friendlyname.Width = 145;
+            // 
+            // packageType
+            // 
+            this.packageType.Text = "Package Type";
+            this.packageType.Width = 80;
             // 
             // version
             // 
@@ -156,40 +175,27 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 32);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.lstSourceSolutions);
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Size = new System.Drawing.Size(1200, 1013);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 654);
             this.splitContainer1.SplitterDistance = 770;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 32);
-            // 
-            // tsbDeleteSolutions
-            // 
-            this.tsbDeleteSolutions.Image = ((System.Drawing.Image)(resources.GetObject("tsbDeleteSolutions.Image")));
-            this.tsbDeleteSolutions.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbDeleteSolutions.Name = "tsbDeleteSolutions";
-            this.tsbDeleteSolutions.Size = new System.Drawing.Size(82, 29);
-            this.tsbDeleteSolutions.Text = "Delete";
-            this.tsbDeleteSolutions.Click += new System.EventHandler(this.tsbDeleteSolutions_Click);
             // 
             // SolutionTransferTool
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SolutionTransferTool";
-            this.Size = new System.Drawing.Size(1200, 1045);
+            this.Size = new System.Drawing.Size(800, 679);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -218,5 +224,6 @@ namespace MscrmTools.ManagedSolutionDeletionTool
         private SplitContainer splitContainer1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsbDeleteSolutions;
+        private ColumnHeader packageType;
     }
 }

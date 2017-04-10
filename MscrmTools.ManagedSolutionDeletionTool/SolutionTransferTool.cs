@@ -127,14 +127,15 @@ namespace MscrmTools.ManagedSolutionDeletionTool
                     var solutions = Service.RetrieveMultiple(new QueryExpression("solution")
                     {
                         ColumnSet = new ColumnSet("publisherid", "installedon", "version", "uniquename", "friendlyname",
-                            "description"),
+                            "description", "ismanaged"),
                         Criteria = new FilterExpression
                         {
                             Conditions =
                             {
-                                new ConditionExpression("ismanaged", ConditionOperator.Equal, true),
+                                //new ConditionExpression("ismanaged", ConditionOperator.Equal, true),
                                 new ConditionExpression("isvisible", ConditionOperator.Equal, true),
-                                new ConditionExpression("uniquename", ConditionOperator.NotEqual, "Active")
+                                new ConditionExpression("uniquename", ConditionOperator.NotEqual, "Active"),
+                                new ConditionExpression("uniquename", ConditionOperator.NotEqual, "Default")
                             }
                         }
                     }).Entities;
@@ -209,6 +210,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
                             Text = solution.Entity.GetAttributeValue<String>("uniquename")
                         };
                         item.SubItems.Add(solution.FriendlyName);
+                        item.SubItems.Add(solution.Entity.GetAttributeValue<bool>("ismanaged") ? "Managed": "Unmanaged");
                         item.SubItems.Add(solution.Entity.GetAttributeValue<String>("version"));
                         item.SubItems.Add(
                             solution.Entity.GetAttributeValue<DateTime>("installedon").ToString("yy-MM-dd HH:mm"));
