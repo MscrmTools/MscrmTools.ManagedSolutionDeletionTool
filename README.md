@@ -1,2 +1,2 @@
 # MscrmTools.ManagedSolutionDeletionTool
-Analyzes and deletes managed solutions with their dependencies
+Analyzes and deletes solutions with their dependencies
