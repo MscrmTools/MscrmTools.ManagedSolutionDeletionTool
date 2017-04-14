@@ -101,7 +101,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
                 return;
             }
 
-            var slp = new SolutionProperties((Solution)lstSourceSolutions.SelectedItems[0].Tag);
+            var slp = new SolutionProperties((Solution)lstSourceSolutions.SelectedItems[0].Tag, ConnectionDetail.WebApplicationUrl);
             slp.Dock = DockStyle.Fill;
             slp.SolutionDeletionRequested += Slp_SolutionDeletionRequested;
             splitContainer1.Panel2.Controls.Add(slp);

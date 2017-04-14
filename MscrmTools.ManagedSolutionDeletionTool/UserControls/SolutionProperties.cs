@@ -2,18 +2,22 @@
 using System.Linq;
 using System.Windows.Forms;
 using MscrmTools.ManagedSolutionDeletionTool.AppCode;
+using System.Diagnostics;
 
 namespace MscrmTools.ManagedSolutionDeletionTool.UserControls
 {
     public partial class SolutionProperties : UserControl
     {
         private readonly Solution solution;
+        private readonly string manageSolutionUrl;
 
-        public SolutionProperties(Solution solution)
+        public SolutionProperties(Solution solution, string crmUrl)
         {
             InitializeComponent();
 
             this.solution = solution;
+
+            manageSolutionUrl = $"{crmUrl}/tools/solution/edit.aspx?id={solution.Id}";
 
             lblSolutionName.Text = solution.FriendlyName;
 
@@ -51,6 +55,12 @@ namespace MscrmTools.ManagedSolutionDeletionTool.UserControls
         private void llDeleteSolutionDependencies_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SolutionDeletionRequested?.Invoke(this, new SolutionDeletionRequestEventArgs(solution));
+        }
+
+        private void lblSolutionName_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo(manageSolutionUrl);
+            Process.Start(sInfo);
         }
     }
 }
