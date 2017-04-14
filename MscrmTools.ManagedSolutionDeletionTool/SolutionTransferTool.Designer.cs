@@ -48,6 +48,8 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tscbPackageType = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -61,7 +63,9 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.toolStripSeparator1,
             this.tsbLoadSolutions,
             this.toolStripSeparator2,
-            this.tsbDeleteSolutions});
+            this.tsbDeleteSolutions,
+            this.tscbPackageType,
+            this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -188,6 +192,24 @@ namespace MscrmTools.ManagedSolutionDeletionTool
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 3;
             // 
+            // tscbPackageType
+            // 
+            this.tscbPackageType.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tscbPackageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tscbPackageType.Items.AddRange(new object[] {
+            "All",
+            "Managed",
+            "Unmanaged"});
+            this.tscbPackageType.Name = "tscbPackageType";
+            this.tscbPackageType.Size = new System.Drawing.Size(121, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(79, 22);
+            this.toolStripLabel1.Text = "Package Type";
+            // 
             // SolutionTransferTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,5 +247,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton tsbDeleteSolutions;
         private ColumnHeader packageType;
+        private ToolStripComboBox tscbPackageType;
+        private ToolStripLabel toolStripLabel1;
     }
 }

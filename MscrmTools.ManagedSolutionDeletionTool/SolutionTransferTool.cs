@@ -29,6 +29,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
         {
             InitializeComponent();
             sols = new List<Solution>();
+            tscbPackageType.SelectedIndex = 0;
         }
 
         #endregion Constructor
@@ -116,6 +117,12 @@ namespace MscrmTools.ManagedSolutionDeletionTool
         /// </summary>
         public void RetrieveSolutions()
         {
+            var isManagedCondition = tscbPackageType.SelectedItem.ToString() == "Managed"
+                ? new ConditionExpression("ismanaged", ConditionOperator.Equal, true)
+                : (tscbPackageType.SelectedItem.ToString() == "Unmanaged"
+                    ? new ConditionExpression("ismanaged", ConditionOperator.Equal, false)
+                    : new ConditionExpression("ismanaged", ConditionOperator.NotNull));
+
             sols = new List<Solution>();
             lstSourceSolutions.Items.Clear();
 
@@ -132,7 +139,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
                         {
                             Conditions =
                             {
-                                //new ConditionExpression("ismanaged", ConditionOperator.Equal, true),
+                                isManagedCondition,
                                 new ConditionExpression("isvisible", ConditionOperator.Equal, true),
                                 new ConditionExpression("uniquename", ConditionOperator.NotEqual, "Active"),
                                 new ConditionExpression("uniquename", ConditionOperator.NotEqual, "Default")
