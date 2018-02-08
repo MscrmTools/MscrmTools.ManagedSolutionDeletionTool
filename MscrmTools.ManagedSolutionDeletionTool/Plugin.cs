@@ -16,7 +16,7 @@ namespace MscrmTools.ManagedSolutionDeletionTool
     {
         public override IXrmToolBoxPluginControl GetControl()
         {
-            return new SolutionTransferTool();
+            return new SolutionDeletionTool();
         }
     }
 }
