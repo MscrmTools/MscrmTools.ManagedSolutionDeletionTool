@@ -14,18 +14,19 @@ using XrmToolBox.Extensibility.Interfaces;
 
 namespace MscrmTools.ManagedSolutionDeletionTool
 {
-    public partial class SolutionTransferTool : PluginControlBase, IGitHubPlugin, IHelpPlugin
+    public partial class SolutionDeletionTool : PluginControlBase, IGitHubPlugin, IHelpPlugin, IMessageBusHost
     {
         #region Variables
 
         private int currentsColumnOrder;
         private List<Solution> sols;
+        private MessageBusEventArgs _incomingMessage;
 
         #endregion Variables
 
         #region Constructor
 
-        public SolutionTransferTool()
+        public SolutionDeletionTool()
         {
             InitializeComponent();
             sols = new List<Solution>();
@@ -46,6 +47,18 @@ namespace MscrmTools.ManagedSolutionDeletionTool
         private void BtnCloseClick(object sender, EventArgs e)
         {
             CloseTool();
+            ReturnToCaller();
+        }
+
+        private void ReturnToCaller()
+        {
+            if (_incomingMessage != null)
+            {
+                OnOutgoingMessage?.Invoke(this, new MessageBusEventArgs(_incomingMessage.SourcePlugin)
+                {
+                    TargetArgument = sols
+                });
+            }
         }
 
         private void TsbLoadSolutionsClick(object sender, EventArgs e)
@@ -279,10 +292,25 @@ namespace MscrmTools.ManagedSolutionDeletionTool
                 DeleteSolution(dependentSolution, worker);
             }
 
-            worker.ReportProgress(0, string.Format("Deleting solution '{0}'...", solution.FriendlyName));
+            worker.ReportProgress(0, $"Deleting solution '{solution.FriendlyName}'...");
             Service.Delete(solution.Entity.LogicalName, solution.Entity.Id);
         }
 
         #endregion Methods
+
+        public void OnIncomingMessage(MessageBusEventArgs message)
+        {
+            _incomingMessage = message;
+            tsbReturn.Visible = true;
+            tsbReturn.Text = $"Return to {message.SourcePlugin}";
+            ExecuteMethod(RetrieveSolutions);
+        }
+
+        public event EventHandler<MessageBusEventArgs> OnOutgoingMessage;
+
+        private void tsbReturn_Click(object sender, EventArgs e)
+        {
+            ReturnToCaller();
+        }
     }
 }
